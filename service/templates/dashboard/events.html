@@ -1,0 +1,31 @@
+{% extends 'dashboard/dashboard.html' %}
+
+
+{% block section_name %}
+События
+{% endblock %}
+
+{% block section_desc %}
+Здесь вы сможете управлять Lorem ipsum dolor sit amet.
+{% endblock %}
+
+{% block upper_section %}
+<div class="row">
+    <a class="link-btn" href="{% url 'event_add' %}">Добавить запись</a>
+</div>
+{% endblock %}
+
+{% block section_content %}
+<ul class="list-group list-group-flush">
+    {% for event in events %}
+        <li class="list-group-item d-flex justify-content-between">
+            <a href="{% url 'event_edit' event_id=event.id_event %}">
+                {{ event.name_event }}
+            </a>
+            <a href="{% url 'event_remove' event_id=event.id_event %}">
+                <i class="bx bx-x bx-sm"></i>
+            </a>
+        </li>                 
+    {% endfor %}
+</ul>
+{% endblock %}

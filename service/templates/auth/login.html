@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+
+{% block nav %}
+<ul>
+    <li class="get-started"><a href="{% url 'register' %}">Регистрация</a></li>
+</ul>
+{% endblock %}
+
+{% block content %}
+<div class="general-container">
+    <section id="contact" class="contact register">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6" data-aos="fade-up">
+                    <h4>Вход в личный кабинет:</h4>
+
+                    <form action="" method="post" class="simple-form">
+                        {% csrf_token %}
+                        {% bootstrap_form form %}
+
+                        <button type="submit">Войти</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section><!-- End Details Section -->
+</div>
+{% endblock %}

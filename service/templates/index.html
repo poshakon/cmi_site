@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- ======= Hero Section ======= -->
+<section id="hero" class="d-flex align-items-center">
+
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-6 d-lg-flex flex-lg-column justify-content-center align-items-stretch pt-5 pt-lg-0 order-2 order-lg-1" data-aos="fade-up">
+				<div>
+					<h1>Добро пожаловать!</h1>
+					<h2>
+						Здесь ты найдешь всё самое интересное для себя: мастер-классы, концерты, выставки и даже работу!
+						Самая актуальная афиша и самые свежие новости.
+					</h2>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</section><!-- End Hero -->
+
+<main id="main">
+
+	<!-- ======= Details Section ======= -->
+	<section id="details" class="details">
+		<div class="container">
+			<div class="row d-flex justify-content-between">
+				<a class="link-btn" href="{% url 'events' %}">События</a>
+				<a class="link-btn" href="{% url 'notices' %}">Мероприятия</a>
+				<a class="link-btn" href="{% url 'news' %}">Новости</a>
+			</div>
+
+			<div class="row">
+				<select class="main-purpose-filter selectpicker">
+					<option value="all" selected>Все варианты</option>
+					{% for purpose in purposes %}
+						<option value="{{ purpose.name_purpose }}" selected>{{ purpose.name_purpose }}</option>
+					{% endfor %}
+				</select>
+			</div>
+
+			{% for post in posts %}
+			<div class="row content">
+				<a href="{% url 'notice_view' record_id=post.id_notice %}">
+					<div class="col-md-8 pt-5 order-2 order-md-1" data-aos="fade-up">
+						<div class="main-event">
+							<h3>"{{ post.id_event }}"</h3>
+						</div>
+						{% if post.id_event.logo %}
+						<div class="main-logo">
+							<img src="{{ post.id_event.logo.url }}" alt="Фотография события">
+						</div>
+						{% endif %}
+						<div class="main-purpose font-italic">
+						{{ post.id_purpose }}
+						</div>
+						<p>{{ post.description|linebreaksbr }}</p>
+					</div>
+				</a>
+			</div>
+			{% endfor %}
+
+		</div>
+	</section><!-- End Details Section -->
+
+</main><!-- End #main -->
+{% endblock %}

@@ -1,0 +1,69 @@
+{% extends 'dashboard/dashboard.html' %}
+
+
+{% block section_name %}
+{{ name }}
+{% endblock %}
+
+{% block section_desc %}
+{% endblock %}
+
+{% block section_content %}
+<ul class="list-group list-group-flush">
+    {% for event in events_evals %}
+        <li class="row list-group-item">
+            <div class="col-md-12">
+                <h4>Событие: {{ event.event }}</h4>
+            </div>
+            <div class="col-md-12">
+                <h5>Мероприятия:</h5>
+                <ol class="list-group">
+                    {% for notice in event.notices_evals %}
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-md-12 high-blocks"><h5><span class="font-weight-bold">Номер {{ forloop.counter }}</span></h5></div>
+                                <div class="col-md-12 high-blocks">
+                                Назначение: <span class="font-weight-bold">{{ notice.notice_info.id_purpose }}</span>
+                                </div>
+                                <div class="col-md-12 high-blocks">
+                                Описание: <span class="font-weight-bold">"{{ notice.notice_info.description|slice:":20" }}..."</span>
+                                </div>
+                                <div class="col-md-12 high-blocks
+                                {% if notice.efficiency >= 0.7 and notice.efficiency <= 1  %}
+                                    colored-efficiency-green
+                                {% elif notice.efficiency >= 0.4 and notice.efficiency < 0.7  %}
+                                    colored-efficiency-yellow
+                                {% else  %}
+                                    colored-efficiency-red
+                                {% endif %}
+                                " data-toggle="tooltip" data-placement="top" title="
+                                {% if notice.efficiency >= 0.7 and notice.efficiency <= 1  %}
+                                    Ваше мероприятие состоялось успешно! Рекомендовано к повторному проведению!
+                                {% elif notice.efficiency >= 0.4 and notice.efficiency < 0.7  %}
+                                    При повторной организации подобного мероприятия стоит более качественно продумать его ход!
+                                {% else  %}
+                                    Повторная организация подобного мероприятия не рекомендуется!
+                                {% endif %}
+                                ">
+                                Эффективность: <span class="font-weight-bold">{{ notice.efficiency|floatformat:3 }}</span>
+                                </div>
+
+                                {% if notice.bad_news %}
+                                    Для последующей организации Вам следует обратить внимание на улучшение следующих показателей:
+                                    <ul class="list-group list-group-flush">
+                                        {% for item in notice.bad_news %}
+                                            <li class="list-group-item">
+                                                {{ item }}
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
+                            </div>
+                        </li>                 
+                    {% endfor %}
+                </ol>
+            </div>
+        </li>                 
+    {% endfor %}
+</ul>
+{% endblock %}

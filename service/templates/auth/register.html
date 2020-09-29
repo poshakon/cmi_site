@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<div class="container d-flex">
+
+    <div class="logo mr-auto">
+    <h1 class="text-light"><a href="{% url 'index' %}">Сайт</a></h1>
+    </div>
+
+    <nav class="nav-menu d-none d-lg-block">
+    <ul>
+        <li class="get-started"><a href="{% url 'login' %}">Войти</a></li>
+    </ul>
+    </nav><!-- .nav-menu -->
+
+</div>
+{% endblock %}
+
+{% block content %}
+<section id="contact" class="contact register">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6" data-aos="fade-up">
+                <h4>Заполните следующие поля для регистрации пользователя:</h4>
+
+                <form action="" method="post" class="php-email-form">
+                    {% csrf_token %}
+                    {{ form }}
+                    <label><input type="checkbox" name="is_org"> Я ОРГАНИЗАТОР</label><br>
+                    <button type="submit">Зарегистрироваться</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section><!-- End Details Section -->
+
+{% endblock %}

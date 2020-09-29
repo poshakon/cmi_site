@@ -1,0 +1,31 @@
+{% extends 'dashboard/dashboard.html' %}
+
+
+{% block section_name %}
+Новости
+{% endblock %}
+
+{% block section_desc %}
+Здесь вы сможете управлять Lorem ipsum dolor sit amet.
+{% endblock %}
+
+{% block upper_section %}
+<div class="row">
+    <a class="link-btn" href="{% url 'news_add' %}">Добавить запись</a>
+</div>
+{% endblock %}
+
+{% block section_content %}
+<ul class="list-group list-group-flush">
+    {% for entry in news %}
+        <li class="list-group-item d-flex justify-content-between">
+            <a href="{% url 'news_edit' news_id=entry.id_news %}">
+                "{{ entry.information|slice:":20" }}..." {{ entry.id_notice }} [ {{ entry.date_news }} ]
+            </a>
+            <a href="{% url 'news_remove' news_id=entry.id_news %}">
+                <i class="bx bx-x bx-sm"></i>
+            </a>
+        </li>                 
+    {% endfor %}
+</ul>
+{% endblock %}

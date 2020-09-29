@@ -1,0 +1,53 @@
+{% extends 'profile.html' %}
+
+{% block header %}
+<div class="container d-flex">
+
+    <div class="logo mr-auto">
+    <h1 class="text-light"><a href="{% url 'index' %}">Сайт</a></h1>
+    </div>
+    
+    <nav class="nav-menu d-none d-lg-block">
+      <ul>
+          <li class="get-started"><a href="{% url 'logout' %}">Выйти</a></li>
+      </ul>
+    </nav><!-- .nav-menu -->
+
+</div>
+{% endblock %}
+
+{% block content %}
+<section id="main-panel" class="main-panel">
+    <div class="container">
+
+    <div class="section-title">
+        <h2>Панель управления</h2>
+        <p>Здесь вы сможете управлять Lorem ipsum dolor sit amet.</p>
+    </div>
+
+    <div class="row" data-aos="fade-up" data-aos-delay="100">
+        <div class="col-lg-6 info">
+            <i class="bx bxs-calendar-event"></i>
+            <h4>События</h4>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+        </div>
+        <div class="col-lg-6 info">
+            <i class="bx bxs-spreadsheet"></i>
+            <h4>Мероприятия</h4>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+        </div>
+        <div class="col-lg-6 info">
+            <i class="bx bxs-user-badge"></i>
+            <h4>Списки участников</h4>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+        </div>
+        <div class="col-lg-6 info">
+            <i class="bx bxs-news"></i>
+            <h4>Новости</h4>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+        </div>
+    </div>
+
+    </div>
+</section><!-- End Contact Section -->
+{% endblock %}

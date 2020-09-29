@@ -1,0 +1,23 @@
+{% extends 'dashboard/dashboard.html' %}
+{% load bootstrap4 %}
+
+{% block extrahead %}
+{{ form.media }}
+{% endblock %}
+
+{% block section_name %}
+    {{ title }}
+{% endblock %}
+
+{% block section_desc %}
+    {{ desc }}
+{% endblock %}
+
+{% block section_content %}
+<form method="POST" class="simple-form" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+
+    <button type="submit">Сохранить</button>
+</form>
+{% endblock %}

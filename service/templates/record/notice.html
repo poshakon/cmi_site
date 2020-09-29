@@ -1,0 +1,103 @@
+{% extends 'record/record.html' %}
+
+
+{% block section_name %}
+Мероприятие события "{{ notice.id_event }}"
+{% endblock %}
+
+{% block section_desc %}
+{% endblock %}
+
+{% block section_content %}
+<div class="row content">
+
+{% if notice.status == 2 %}
+    <div class="yellow-status">Проводится в данный момент</div>
+{% elif notice.status == 0 %}
+    <div class="green-status">Проведено</div>
+{% else %}
+    <div class="red-status">Готовится</div>
+{% endif %}
+
+{% if is_part and remains %}
+    <a href="{% url 'become_part' notice_id=notice.id_notice %}" class="link-btn">
+    {% if is_part_of_current %}
+        Отписаться
+    {% else %}
+        Записаться
+    {% endif %}
+    </a>
+{% endif %}
+
+</div>
+
+{% if notice.id_purpose %}
+    <div class="row content">
+        <div class="col-md-6 notice-purpose">
+            <span class="font-weight-bold text-uppercase">
+                Набор на позицию "<span class="font-weight-light">{{ notice.id_purpose }}</span>"
+            </span>
+        </div>
+    </div>
+{% endif %}
+
+{% if notice.date_notice %}
+    <div class="row content">
+        <div class="col-md-6 notice-date">
+            <span class="font-weight-bold text-uppercase">
+                Дата:
+            </span>
+            <span class="font-italic">
+                {{ notice.date_notice }}
+            </span>
+        </div>
+    </div>
+{% endif %}
+
+{% if notice.time_n %}
+    <div class="row content">
+        <div class="col-md-6 notice-time">
+            <span class="font-weight-bold text-uppercase">
+                Время начала:
+            </span>
+            <span class="font-italic">
+                {{ notice.time_n }}
+            </span>
+        </div>
+    </div>
+{% endif %}
+
+{% if notice.location %}
+    <div class="row content">
+        <div class="col-md-6 notice-location">
+            <span class="font-weight-bold text-uppercase">
+                Место проведения:
+            </span>
+            <span class="font-italic">
+                {{ notice.location }}
+            </span>
+        </div>
+    </div>
+{% endif %}
+
+{% if notice.max_part %}
+    <div class="row content">
+        <div class="col-md-6 notice-max-part">
+            <span class="font-weight-bold text-uppercase">
+                Общее количество участников:
+            </span>
+            <span class="font-italic">
+                {{ notice.max_part }} ({{ remains }} мест осталось)
+            </span>
+        </div>
+    </div>
+{% endif %}
+
+{% if notice.description %}
+    <div class="row content">
+        <div class="col-md-12 notice-location">
+            <p>{{ notice.description }}</p>
+        </div>
+    </div>
+{% endif %}
+{% endblock %}

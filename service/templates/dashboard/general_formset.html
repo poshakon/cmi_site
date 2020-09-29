@@ -1,0 +1,36 @@
+{% extends 'dashboard/dashboard.html' %}
+{% load bootstrap4 %}
+
+{% block extrahead %}
+{{ form.media }}
+{% endblock %}
+
+{% block section_name %}
+    {{ title }}
+{% endblock %}
+
+{% block section_desc %}
+    {{ desc }}
+{% endblock %}
+
+{% block section_content %}
+<form method="POST" class="simple-form" enctype="multipart/form-data">
+    {{ formset.management_form }}
+    {% csrf_token %}
+    
+    {% for form, crit in zip_list %}
+        <label style="display: block;">
+            {{ crit.name_criteria }} (от {{ crit.minimum }} до {{ crit.maximum }})
+            {% bootstrap_form form %}
+        </label>
+    {% endfor %}
+
+    {% comment %} {% for form in formset %}
+        <label style="display: block;">
+            {% bootstrap_form form %}
+        </label>
+    {% endfor %} {% endcomment %}
+
+    <button type="submit">Сохранить</button>
+</form>
+{% endblock %}

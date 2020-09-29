@@ -1,0 +1,62 @@
+{% extends 'dashboard/dashboard.html' %}
+
+
+{% block nav %}
+<ul>
+    {% if is_part %}
+        <li class="get-started"><a href="{% url 'logout' %}">Выйти</a></li>
+    {% else %}
+        <li class="get-started"><a href="{% url 'login' %}">Войти</a></li>
+    {% endif %}
+</ul>
+{% endblock %}
+
+{% block section_name %}
+{{ name }}
+{% endblock %}
+
+{% block section_desc %}
+{{ description }}
+{% endblock %}
+
+{% block section_content %}
+{% if name == 'Новости' %}
+    <section id="details" class="details">
+        <div class="container">
+            {% for record in records %}
+                <div class="row content">
+                    <a href="{% url url record_id=record.id_news %}">
+                    <div class="col-md-8 pt-5 order-2 order-md-1" data-aos="fade-up">
+                        <h3>{{ record.id_notice.location }}</h3>
+                        <p class="font-italic">{{ record.date_news }} {{ record.id_notice }} {{ record.id_notice.id_event }}</p>
+                        <p>{{ post.information|linebreaksbr }}</p>
+                        {% if record.photos %}
+                            <div class="news-photo">
+                                <img src="{{ record.photos.url }}" alt="Фотография новости">
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section><!-- End Details Section -->
+{% else %}
+    <ul class="list-group list-group-flush">
+        {% for record in records %}
+            <li class="list-group-item">
+                    {% url url record_id=record.id_notice as notice_url %}
+                    {% url url record_id=record.id_event as event_url %}
+
+                    {% if record.id_event and record.name_event %}
+                        <a href="{{ event_url }}">
+                    {% elif record.id_notice and record.date_notice %}
+                        <a href="{{ notice_url }}">
+                    {% endif %}
+
+                    {% firstof record.name_event record.information record.description %}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends 'dashboard/dashboard.html' %}
+{% load bootstrap4 %}
+
+
+{% block extrahead %}
+{{ form.media }}
+{% endblock %}
+
+{% block section_name %}
+Отчет о проведенных мероприятиях
+{% endblock %}
+
+{% block section_desc %}
+{% endblock %}
+
+{% block section_content %}
+
+<form method="POST" class="simple-form admin-form" action="{% url 'admin_report' %}">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+
+    <input type="submit" name="action" value="Выгрузить">
+    <input type="submit" name="action" value="XLS">
+</form>
+
+<table class="table table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th>Мероприятие</th>
+            <th>Событие</th>
+            <th>Количество участников</th>
+            <th>Дата</th>
+            <th>Оценка</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for event in events_evals %}
+            {% for notice in event.notices_evals %}
+                <tr>
+                    <td>
+                        {{ notice.notice_info }}
+                    </td>
+                    <td>
+                        {{ event.event }}
+                    </td>
+                    <td>
+                        {{ notice.people_counter }}
+                    </td>
+                    <td>
+                        {{ notice.notice_date }}
+                    </td>
+                    <td>
+                        {{ notice.efficiency|floatformat:4 }}
+                    </td>
+                </tr>
+            {% endfor %}
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

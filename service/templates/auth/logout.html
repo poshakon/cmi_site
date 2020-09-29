@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block nav %}
+<ul>
+    <li><a href="{% url 'register' %}">Регистрация</a></li>
+    <li class="get-started"><a href="{% url 'login' %}">Войти</a></li>
+</ul>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="general-container">
+    <section id="contact" class="contact register">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6" data-aos="fade-up">
+                    <h4>Вы успешно вышли из аккаунта!</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'dashboard/dashboard.html' %}
+
+
+{% block section_name %}
+Мероприятия
+{% endblock %}
+
+{% block section_desc %}
+Здесь вы сможете управлять Lorem ipsum dolor sit amet.
+{% endblock %}
+
+{% block upper_section %}
+<div class="row">
+    <a class="link-btn" href="{% url 'notice_add' %}">Добавить запись</a>
+</div>
+{% endblock %}
+
+{% block section_content %}
+<ul class="list-group list-group-flush">
+    {% for notice in notices %}
+        <li class="list-group-item d-flex justify-content-between">
+            <a href="{% url 'notice_edit' notice_id=notice.id_notice %}">
+                {{ notice.id_event }} {{ notice.id_purpose }} "{{ notice.description|slice:":20" }}..."
+            </a>
+            <a href="{% url 'notice_remove' notice_id=notice.id_notice %}">
+                <i class="bx bx-x bx-sm"></i>
+            </a>
+        </li>                 
+    {% endfor %}
+</ul>
+{% endblock %}

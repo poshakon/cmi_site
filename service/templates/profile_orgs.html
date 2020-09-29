@@ -1,0 +1,24 @@
+{% extends 'profile.html' %}
+
+{% block content %}
+<section id="main-panel" class="main-panel">
+    <div class="container">
+
+        <div class="section-title">
+            <h2>Панель управления</h2>
+            <p>Здесь вы сможете управлять Lorem ipsum dolor sit amet.</p>
+        </div>
+
+        <div class="row" data-aos="fade-up" data-aos-delay="100">
+            {% for category in categories %}
+                <a class="col-lg-6 info" href="{% url category.url %}">
+                    <i class="bx {{ category.icon_class }}"></i>
+                    <h4>{{ category.name }}</h4>
+                    <p>{{ category.description|linebreaksbr }}</p>
+                </a>
+            {% endfor %}
+        </div>
+
+    </div>
+</section><!-- End Contact Section -->
+{% endblock %}

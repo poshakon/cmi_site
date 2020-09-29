@@ -1,0 +1,47 @@
+{% extends 'autenticated.html' %}
+
+
+{% block nav %}
+<ul>
+    <li class="get-started"><a href="{% url 'logout' %}">Выйти</a></li>
+</ul>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="general-container">
+    <section id="main-panel" class="main-panel">
+        <div class="container">
+
+            <div class="section-title">
+                <h2>
+                    {% block section_name %}
+                    Панель управления
+                    {% endblock %}
+                </h2>
+                <p>
+                    {% block section_desc %}
+                    Здесь вы сможете управлять Lorem ipsum dolor sit amet.
+                    {% endblock %}
+                </p>
+            </div>
+
+            {% block upper_section %}
+            {% endblock %}
+
+            <div class="row" data-aos="fade-up" data-aos-delay="100">
+                {% block section_content %}
+                    {% for category in categories %}
+                        <a class="col-lg-6 info" href="{% url category.url %}">
+                            <i class="bx {{ category.icon_class }}"></i>
+                            <h4>{{ category.name }}</h4>
+                            <p>{{ category.description|linebreaksbr }}</p>
+                        </a>
+                    {% endfor %}
+                {% endblock %}
+            </div>
+
+        </div>
+    </section><!-- End Contact Section -->
+</div>
+{% endblock %}

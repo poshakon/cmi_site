@@ -1,0 +1,20 @@
+{% extends 'dashboard/dashboard.html' %}
+
+
+{% block section_name %}
+Мероприятия
+{% endblock %}
+
+{% block section_desc %}
+Здесь вы сможете управлять Lorem ipsum dolor sit amet.
+{% endblock %}
+
+{% block section_content %}
+<ul class="list-group list-group-flush">
+    {% for list in lists %}
+        <li class="list-group-item">
+            {{ list.id_notice }} {{ list.login }}
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}

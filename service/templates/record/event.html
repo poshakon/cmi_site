@@ -1,0 +1,28 @@
+{% extends 'record/record.html' %}
+
+
+{% block section_name %}
+Cобытие {{ event.name_event }}
+{% endblock %}
+
+{% block section_desc %}
+Уровень: {{ event.id_level }}
+{% endblock %}
+
+{% block section_content %}
+
+{% if event.logo %}
+<div class="row content">
+    <div class="event-logo">
+        <img src="{{ event.logo.url }}" alt="Фотография новости">
+    </div>
+</div>
+{% endif %}
+
+
+{% if event.document %}
+<div class="row content">
+    <a href="{{ event.document.url }}">Скачать документ</a>
+</div>
+{% endif %}
+{% endblock %}
